@@ -11,7 +11,7 @@ import { createOrder } from '../services/order'
 import { useAuth } from '../hooks/useAuth'
 import PreparingPage from './PreparingPage'
 import ModalComponent from '../components/ModalComponent'
-
+import { useNavigation } from '@react-navigation/native'
 const OrderSummary = () => {
   const items = useSelector(select_basket_item)
   const total_basket = useSelector(select_basket_total)
@@ -26,7 +26,7 @@ const OrderSummary = () => {
   const [showPreparing, setShowPreparing] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [orderSuccess, setOrderSuccess] = useState(false)
-
+  const navigation = useNavigation()  
   useEffect(() => { 
     const grouped_items = items.reduce((results, items) => { 
       (results[items.id] = results[items.id] || []).push(items);
@@ -65,6 +65,10 @@ const OrderSummary = () => {
       const response = await createOrder(orderData);
       // Handle successful order creation
       setOrderSuccess(true);
+      setTimeout(() => {
+        navigation.navigate("Root");
+      }, 3000); 
+
     } catch (error) {
       // Handle order creation error
       setOrderSuccess(false);

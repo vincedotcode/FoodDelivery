@@ -44,6 +44,7 @@ export const createOrder = asyncHandler(async (req, res) => {
 });
 
 // Update delivery step status
+// Update delivery step status
 export const updateDeliveryStepStatus = asyncHandler(async (req, res) => {
   const { orderId, stepId } = req.params;
   const { status } = req.body;
@@ -63,7 +64,6 @@ export const updateDeliveryStepStatus = asyncHandler(async (req, res) => {
     res.status(404).json({ message: "Order not found" });
   }
 });
-
 // Cancel an order
 export const cancelOrder = asyncHandler(async (req, res) => {
   const { orderId } = req.params;

@@ -28,6 +28,11 @@ const AccountScreen = () => {
     navigation.navigate('Signin');
   };
 
+  const handleMyOrders = async () => {
+    navigation.navigate('MyRestaurantOrder');
+  };
+
+
   return (
     <ScrollView className="bg-white min-h-screen">
       <SafeAreaView className="pt-16 px-4 pb-[200px]">
@@ -77,17 +82,10 @@ const AccountScreen = () => {
         {/* Restaurant Specific Sections */}
         {user?.role === 'restaurant' && (
           <>
-            <View className="border-b border-gray-300/80 pt-3 pb-4">
-              <TouchableOpacity>
-                <Text className="text-left text-xl font-medium">
-                  My Restaurant
-                </Text>
-              </TouchableOpacity>
-            </View>
 
-         
             <View className="border-b border-gray-300/80 pt-3 pb-4">
-              <TouchableOpacity>
+              <TouchableOpacity
+              onPress={handleMyOrders}>
                 <Text className="text-left text-xl font-medium">
                   My Restaurant Orders
                 </Text>

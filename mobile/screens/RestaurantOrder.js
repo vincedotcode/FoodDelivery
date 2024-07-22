@@ -1,9 +1,10 @@
 import { View, Text, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import OrderCard from '../components/OrderCard';
+import OrderCardResto from '../components/OrderCardResto';
 import { getOrdersByRestaurantId } from '../services/order';
 import { getToken, getUser } from '../hooks/useStorage';
-import { getRestaurantByUserId } from '../services/restaurant'; // Ensure you have this service
+import { getRestaurantByUserId } from '../services/menu';
+import BackButton from '../components/BackButton';
 
 const RestaurantOrdersScreen = () => {
   const [orders, setOrders] = useState([]);
@@ -38,18 +39,20 @@ const RestaurantOrdersScreen = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
+  const fetchOrders = async () => {
+    try {
+      if (restaurant && restaurant._id) {
         const fetchedOrders = await getOrdersByRestaurantId(restaurant._id);
         setOrders(fetchedOrders);
-      } catch (error) {
-        console.error('Error fetching orders:', error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     if (restaurant) {
       fetchOrders();
     }
@@ -57,20 +60,28 @@ const RestaurantOrdersScreen = () => {
 
   return (
     <ScrollView className="bg-white min-h-screen">
+      <View className="h-[311px] bg-[#d9d9d9]">
+        <Text className="text-white text-4xl font-bold text-center pt-10">Orders</Text>
+
+        <View className="m-5 z-50 absolute">
+          <BackButton />
+        </View>
+      </View>
       <SafeAreaView className="pt-16 px-4 pb-20">
         <View>
           <Text className="font-medium text-left text-3xl">Restaurant Orders</Text>
         </View>
-        <View className="border-y border-gray-300/80 rounded"/>
+        <View className="border-y border-gray-300/80 rounded" />
 
         <View className="mt-4">
           {loading ? (
             <ActivityIndicator size="large" color="#0000ff" />
           ) : (
             orders.map((order) => (
-              <OrderCard
+              <OrderCardResto
                 key={order._id}
                 order={order}
+                onUpdateSuccess={fetchOrders}
               />
             ))
           )}

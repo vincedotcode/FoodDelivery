@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8080/api/v1/restaurants/menus';
+const API_URL_RESTAURANT = process.env.EXPO_PUBLIC_API_URL || 'http://localhost:8080/api/v1/restaurants';
 
 export const getAllMenus = async () => {
   try {
@@ -25,7 +26,7 @@ export const getAllMenus = async () => {
 
 export const getRestaurantByUserId = async (userId) => {
   try {
-    const response = await axios.get(`${API_URL}/user/${userId}`);
+    const response = await axios.get(`${API_URL_RESTAURANT}/user/${userId}`);
     return response.data;
   } catch (error) {
     if (error.response) {

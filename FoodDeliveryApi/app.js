@@ -7,6 +7,7 @@ import connectDB from "./database/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import restaurantRoutes from "./routes/restaurantRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";  // Import orderRoutes
+import foodOrderRoutes from './routes/foodOrderRoutes.js';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
@@ -47,6 +48,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/v1/auth", userRoutes);
 app.use("/api/v1/restaurants", restaurantRoutes);
 app.use("/api/v1/orders", orderRoutes);  // Add orderRoutes
+app.use('/api/v1', foodOrderRoutes);
 
 //******** PORTS AND LISTEN *******/
 const port = process.env.PORT || 8080;
