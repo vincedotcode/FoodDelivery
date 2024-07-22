@@ -22,3 +22,25 @@ export const getAllMenus = async () => {
     }
   }
 };
+
+export const getRestaurantByUserId = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(JSON.stringify({
+        statusCode: error.response.status,
+        message: error.response.data.message || ['An unexpected error occurred'],
+        error: error.response.data.error || 'Bad Request'
+      }));
+    } else {
+      throw new Error(JSON.stringify({
+        statusCode: 500,
+        message: ['Network Error or Internal Server Error'],
+        error: 'Server Error'
+      }));
+    }
+  }
+};
+

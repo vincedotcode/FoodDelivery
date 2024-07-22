@@ -10,6 +10,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import BasketScreen from '../screens/BasketScreen';
 import BottomUpPopup from '../components/BottomUpPopup';
 import OrderSummary from '../screens/OrderSummary';
+import RestaurantOrder from '../screens/RestaurantOrder';
 import PreparingPage from '../screens/PreparingPage';
 import DeliveryState from '../screens/DeliveryState';
 import OrderConfirmed from '../screens/on_delivery_screens/OrderConfirmed';
@@ -99,6 +100,14 @@ const Navigation = () => {
       <Stack.Screen
         name="OrderSummary"
         component={OrderSummary}
+        options={{
+          presentation: 'fullScreenModal',
+          headerShown: false,
+        }}
+      />
+        <Stack.Screen
+        name="MyRestaurantOrder"
+        component={RestaurantOrder}
         options={{
           presentation: 'fullScreenModal',
           headerShown: false,

@@ -85,14 +85,7 @@ const AccountScreen = () => {
               </TouchableOpacity>
             </View>
 
-            <View className="border-b border-gray-300/80 pt-3 pb-4">
-              <TouchableOpacity>
-                <Text className="text-left text-xl font-medium">
-                  My Menu
-                </Text>
-              </TouchableOpacity>
-            </View>
-
+         
             <View className="border-b border-gray-300/80 pt-3 pb-4">
               <TouchableOpacity>
                 <Text className="text-left text-xl font-medium">
