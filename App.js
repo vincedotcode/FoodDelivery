@@ -11,23 +11,26 @@ import BottomTab from './Navigation/BottomTab';
 import { Provider } from 'react-redux';
 import store from './store';
 import * as Font from 'expo-font';
-import { AppLoading} from 'expo';
+import { AppLoading } from 'expo';
+import { AuthProvider } from './hooks/AuthContext';
 
 
 const Stack = createNativeStackNavigator();
 
 
 export default function App() {
-  return (
+  return (<AuthProvider>
     <NavigationContainer>
       <Provider store={store}>
-        <StatusBar style='auto'/>
-          <TailwindProvider>
+        <StatusBar style='auto' />
+        <TailwindProvider>
 
-            <Navigation />
-          </TailwindProvider>
+          <Navigation />
+        </TailwindProvider>
       </Provider>
     </NavigationContainer>
+  </AuthProvider>
+
 
   );
 }

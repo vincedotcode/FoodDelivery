@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import DealProductInfo from './DealProductInfo'
-import SuggestedCard from './SuggestedCard'
 import PopularPlaceCard from './PopularPlaceCard'
 
 const DealPopularPlaces = () => {

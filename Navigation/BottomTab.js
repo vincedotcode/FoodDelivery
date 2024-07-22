@@ -84,15 +84,7 @@ const BottomTab = () => {
           )
         )
       }} />
-      <Tab.Screen name="Today" component={DealsScreen} options={{
-        tabBarIcon: ({focused}) => (
-            focused ? (
-              <TagFocus size={35} strokeWidth={1.5} color={"#000"} />   
-            ): (
-              <TagIcon size={35} strokeWidth={1.5} color={"#000"} />   
-            ) 
-          )
-      }} />
+      
       
       <Tab.Screen name="Accounts" component={AccountScreen} options={{
         tabBarIcon: ({focused}) => (

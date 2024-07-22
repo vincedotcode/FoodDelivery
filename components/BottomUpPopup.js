@@ -5,11 +5,29 @@ import { ChevronDownIcon, ChevronRightIcon, LocationMarkerIcon } from 'react-nat
 import { useSelector } from 'react-redux'
 import { select_basket_total } from '../redux/basketSlice'
 import * as Animatable from 'react-native-animatable'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { getToken, getUser, removeToken, removeUser } from '../hooks/useStorage';
 
 const BottomUpPopup = () => {
     const navigation = useNavigation()
     const total_basket = useSelector(select_basket_total)
+    const [loading, setLoading] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [token, setToken] = useState(null);
+    const [user, setUser] = useState(null);
+  
 
+    useEffect(() => {
+      const loadStoredData = async () => {
+        const storedToken = await getToken();
+        const storedUser = await getUser();
+        setToken(storedToken);
+        setUser(storedUser);
+        setLoading(false);
+      };
+      loadStoredData();
+    }, []);
     return (
         <View className="bg-black/75 min-h-full">
             <TouchableOpacity className="  min-h-[60%]" onPress={() => {navigation.goBack()}} />
@@ -23,7 +41,7 @@ const BottomUpPopup = () => {
                         <View className="items-center flex flex-row space-x-2">
                             <LocationMarkerIcon size={20}/>
                             <Text className="font-semibold text-base ml-1 underline-offset-1">
-                                Lorem Ipsum Street 
+                            {user?.address || 'No Address Provided'}
                             </Text>
                             <Text className="">
                                 <ChevronRightIcon size={20} strokeWidth={4} />
@@ -35,7 +53,7 @@ const BottomUpPopup = () => {
                 <View className="">
                     <View className="flex flex-row justify-between">
                         <Text className="text-xl font-medium text-left">Estimated total cost</Text>
-                        <Text className="text-xl font-medium text-left">~${Math.floor(-total_basket) + Math.floor((-total_basket)/16)}</Text>
+                        <Text className="text-xl font-medium text-left">Rs {Math.floor(total_basket) + Math.floor((total_basket)/16)}</Text>
                     </View>
                     <Text className="w-[328px] text-left text-sm text-gray-600">
                         Please note that for items sold by weight, the exact 

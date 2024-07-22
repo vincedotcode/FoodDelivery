@@ -1,23 +1,46 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-const SuggestedCard = ({title, restaurant_name, price}) => {
+const SuggestedCard = ({ menuItem }) => {
+  const navigation = useNavigation();
+  const {
+    _id,
+    name,
+    description,
+    avg_person,
+    delivery,
+    avg_waiting,
+    restaurant_name,
+    image,
+    price,
+  } = menuItem;
+
   return (
-    <View>
-      <View className="flex flex-row items-center mb-3 mt-2">
-        <View className="w-[63px] h-[64px] bg-[#d9d9d9] rounded-md mr-4"/>
-        <View className="mb-5">
-          <Text className="text-left font-medium text-lg">{title}</Text>
-          <Text className="text-gray-500 font-medium text-xs mt-1">From {restaurant_name}</Text>
-        </View>
-        {/* Price */}
-        <View className="absolute right-1 flex items-center justify-center w-[70px] h-[28px] rounded-lg bg-[#c8c8c8]">
-          <Text className="text-center font-bold">${price}</Text>
-        </View>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('FoodStack', {
+          id: _id,
+          name,
+          description,
+          avg_person,
+          delivery,
+          avg_waiting,
+          restaurant_name,
+          image,
+          price,
+        });
+      }}
+      className="flex-row items-center bg-white p-4 mb-2 rounded-xl shadow-md"
+    >
+      <Image source={{ uri: image }} className="w-16 h-16 rounded-lg" />
+      <View className="ml-4 flex-1">
+        <Text className="text-lg font-bold">{name}</Text>
+        <Text className="text-gray-500">{restaurant_name}</Text>
+        <Text className="text-gray-600">Rs {price}</Text>
       </View>
-      <View className="absolute right-0 bottom-1 w-[85%] h-7 border-b border-gray-300/80 "/>
-    </View>
-  )
-}
+    </TouchableOpacity>
+  );
+};
 
-export default SuggestedCard
+export default SuggestedCard;

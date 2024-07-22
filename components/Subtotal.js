@@ -15,18 +15,18 @@ const Subtotal = ({
           <View className="border-y border-gray-300/80 my-4 rounded"/>
             <View className="justify-between flex flex-row">
               <Text className="font-normal text-sm text-left text-gray-400">Subtotal</Text>
-              <Text className="font-bold text-sm text-left text-gray-600">{subtotal}</Text>
+              <Text className="font-bold text-sm text-left text-gray-600">Rs {subtotal.toFixed(2)}</Text>
             </View>
           <View>
             <View className="justify-between flex flex-row">
-              <Text className="font-normal text-sm text-left text-gray-400">Discounts</Text>
-              <Text className="font-bold text-sm text-left text-gray-600">{discount}</Text>
+              <Text className="font-normal text-sm text-left text-gray-400">Packaging</Text>
+              <Text className="font-bold text-sm text-left text-gray-600">Rs {discount.toFixed(2)}</Text>
             </View>
           </View>
           <View>
             <View className="justify-between flex flex-row">
               <Text className="font-normal text-sm text-left text-gray-400">Shipping Fee</Text>
-              <Text className="font-bold text-sm text-left text-gray-600">{shipping_fee}</Text>
+              <Text className="font-bold text-sm text-left text-gray-600">Rs {shipping_fee.toFixed(2)}</Text>
             </View>
           </View>
 {/* Total */}
@@ -42,7 +42,7 @@ const Subtotal = ({
 
                 <View className="items-center space-x-1 flex flex-row">
                   <Text className="text-gray-400 text-xs font-medium">({items} items)</Text>
-                  <Text className="font-bold text-2xl text-left"> ${total}
+                  <Text className="font-bold text-2xl text-left"> Rs {total.toFixed(2)}
                   </Text>
                 </View>
               </View>

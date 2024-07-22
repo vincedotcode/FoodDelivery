@@ -1,17 +1,31 @@
 import { View, Text, TouchableOpacity, Modal } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import CheckList from '../../components/timeline_events/CheckList';
 
-const DeliveryInProgress = ({ order, onClose }) => {
+const DeliveryInProgress = ({ route }) => {
+  const navigation = useNavigation();
+  const { order } = route.params;
+  const [modalVisible, setModalVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setModalVisible(false);
+      navigation.navigate('CourierOnItsWay', { order });
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [navigation, order]);
+
   return (
     <Modal
       transparent={true}
       animationType="slide"
-      visible={true}
-      onRequestClose={onClose}
+      visible={modalVisible}
+      onRequestClose={() => setModalVisible(false)}
     >
       <View className="bg-black/75 flex-1 justify-end">
-        <TouchableOpacity className="flex-1" onPress={onClose} />
+        <TouchableOpacity className="flex-1" onPress={() => setModalVisible(false)} />
         <View className="bg-white h-[318px] w-full rounded-t-3xl px-4 pt-8">
           <View className="items-center">
             <View className="flex flex-row justify-center space-x-9 items-end">

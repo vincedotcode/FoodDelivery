@@ -5,16 +5,15 @@ import { HeartIcon as Heart } from 'react-native-heroicons/outline'
 import { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-
-// THe params will mostly change , for now the priority is to build the ui and 
-// fix the data sets later
-const RecommendedCard = ({  id,
+const RecommendedCard = ({
+  id,
   name,
   description,
   avg_person,
   delivery,
   avg_waiting,
   restaurant_name,
+  restaurant_id, // Receive the restaurant ID
   image,
   price,
 }) => {
@@ -32,10 +31,11 @@ const RecommendedCard = ({  id,
         delivery,
         avg_waiting,
         restaurant_name,
+        restaurant_id, // Pass the restaurant ID
         image,
         price,
       })}}
-      className="w-[281px] h-[179px] bg-black/10  rounded-2xl mr-4">
+      className="w-[281px] h-[179px] bg-black/10  rounded-2xl mr-4 mb-2 mt-2">
       {/* Waiting time widget */}
       
       <Image 
@@ -75,7 +75,6 @@ const RecommendedCard = ({  id,
           }
       </TouchableOpacity>
 
-
       {/* Good for this many persons */}
       <View className="absolute bottom-3 space-y-2 left-4">
         <Text className="text-xl text-left font-bold relative bottom-1 text-white">{name}</Text>
@@ -90,9 +89,7 @@ const RecommendedCard = ({  id,
           <View className="flex items-center justify-center px-2 h-[23px] bg-[#c8c8c8]/40 rounded-lg">
             <Text className="text-white font-medium text-sm">{delivery}</Text>
           </View>
-
         </View>
-
       </View>
     </TouchableOpacity>
   )

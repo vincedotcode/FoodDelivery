@@ -5,7 +5,7 @@ import { select_basket_item, select_basket_total } from '../redux/basketSlice'
 import { useNavigation } from '@react-navigation/native'
 import {ShoppingBagIcon} from 'react-native-heroicons/outline'
 import {ChevronRightIcon, CreditCardIcon} from 'react-native-heroicons/solid'
-import Currency from 'react-currency-formatter'
+
 import * as Animatable from 'react-native-animatable'
 
 
@@ -38,7 +38,9 @@ const PaymentBar = () => {
         flex-row items-center">
 
           <Text className="text-white font-bold text-left text-lg">
-            <Currency quantity={-basket_total} currency="USD" />
+          <Text>
+              {basket_total}
+            </Text>
           </Text>
           
           <View className="relative top-0">
