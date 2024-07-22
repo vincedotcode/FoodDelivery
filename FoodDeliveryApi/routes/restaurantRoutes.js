@@ -7,7 +7,8 @@ import {
   deleteRestaurant,
   getMenuItems,
   getAllMenus,
-  addMenuItem
+  addMenuItem,
+  getRestaurantByUserId
 } from '../controllers/restaurantController.js';
 
 const router = express.Router();
@@ -68,6 +69,69 @@ const router = express.Router();
  *         description: Error fetching restaurants
  */
 router.route("/").get(getRestaurants).post(createRestaurant);
+
+// Get restaurant by user ID
+/**
+ * @swagger
+ * /api/v1/restaurants/user/{userId}:
+ *   get:
+ *     summary: Get a restaurant by user ID
+ *     tags: [Restaurants]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: User ID
+ *     responses:
+ *       200:
+ *         description: Restaurant data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 name:
+ *                   type: string
+ *                 owner:
+ *                   type: string
+ *                 address:
+ *                   type: string
+ *                 phone_number:
+ *                   type: string
+ *                 cuisine:
+ *                   type: string
+ *                 rating:
+ *                   type: number
+ *                 menu:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       name:
+ *                         type: string
+ *                       category:
+ *                         type: string
+ *                       price:
+ *                         type: number
+ *                       isDiscount:
+ *                         type: boolean
+ *                       discountedPrice:
+ *                         type: number
+ *                       description:
+ *                         type: string
+ *                       image:
+ *                         type: string
+ *       404:
+ *         description: Restaurant not found
+ */
+router.route("/user/:userId").get(getRestaurantByUserId);
+
 
 // Create a new restaurant
 /**
